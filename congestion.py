@@ -5,8 +5,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 import xgboost as xgb
 import matplotlib.pyplot as plt
+import os
 
-congestion_data = pd.read_csv("./congestion.csv", index_col='Time')
+
+congestion_data = pd.read_csv(os.getcwd() + "/congestion.csv", index_col='Time')
 
 # print(congestion_data.index)
 # print(congestion_data.columns)
