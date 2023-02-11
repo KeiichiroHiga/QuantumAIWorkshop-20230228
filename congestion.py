@@ -7,8 +7,7 @@ import xgboost as xgb
 import matplotlib.pyplot as plt
 import os
 
-
-congestion_data = pd.read_csv(os.getcwd() + "/congestion.csv", index_col='Time')
+congestion_data = pd.read_csv(os.path.dirname(__file__) + "/congestion.csv", index_col='Time')
 
 # print(congestion_data.index)
 # print(congestion_data.columns)
