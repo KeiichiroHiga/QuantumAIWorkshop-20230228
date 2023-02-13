@@ -1,11 +1,10 @@
 import numpy as np
 from dimod import BinaryQuadraticModel
 from neal import SimulatedAnnealingSampler
-from dwave.cloud import Client
 from dwave.system import DWaveSampler, EmbeddingComposite
 from pyqubo import Binary
 
-from congestion import get_noise_data, get_train_data, train, predict, show_congestion
+from part2.congestion import get_noise_data, get_train_data, train, predict, show_congestion
 from traffic_map import get_map_data, get_nearest_nodes, get_shortest_path, show_map_data
 
 ########################
@@ -35,7 +34,7 @@ PATH_NUMBER = 5
 # アニーリング設定
 weight = 1000
 SHOTS = 1000
-DWAVE_TOKEN="DEV-23ccf84a7309685a2ced8a8baa56889de62d7e5c"
+DWAVE_TOKEN=""
 
 ########################
 ######   古典AI    ######
