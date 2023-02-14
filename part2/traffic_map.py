@@ -64,4 +64,7 @@ def show_map_data(G, routes, route_colors='r', ax=None) -> None:
     # ox.plot_graph(G, bgcolor='#ffffff', node_color='#87cefa')
 
     # 経路を可視化する
-    return ox.plot_graph_routes(G, routes, bgcolor='#ffffff', node_color='#87cefa', route_colors=route_colors, route_linewidth=2, route_alpha=0.8, orig_dest_size=100, ax=ax)
+    if len(routes) == 1:
+        return ox.plot_graph_route(G, routes, bgcolor='#ffffff', node_color='#87cefa', route_color=route_colors, route_linewidth=2, route_alpha=0.8, orig_dest_size=100, ax=ax)
+    else:
+        return ox.plot_graph_routes(G, routes, bgcolor='#ffffff', node_color='#87cefa', route_colors=route_colors, route_linewidth=2, route_alpha=0.8, orig_dest_size=100, ax=ax)
