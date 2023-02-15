@@ -1,5 +1,19 @@
 ## 量子・AIハイブリッドの基礎を学習するセミナー
 
+### Part1
+量子アニーリングを簡単に使ってみる。
+
+以下の地図で s から g に行くための最短経路を考える。
+```
+s -> 1 -> g
+     ↓
+     2
+```
+
+Google Colab でも試すことができます。
+https://colab.research.google.com/drive/14lPDy6d7z3paacHcERqpI7ETmsmmlP7j?usp=sharing
+
+### Part2
 交通最適化問題を量子アニーリングと古典AIを用いて解いてみる。
 
 **古典AI**\
@@ -18,8 +32,12 @@
 **課題**\
 交通混雑を予想して、混雑が見込まれる場合は経路を変更させる。
 
+Google Colab でも試すことができます。
+https://colab.research.google.com/drive/1i8cCGeaL8Sdju1x1Aty6uCMhL20SKFRq?usp=sharing
+
+---
 **動作環境**\
-MacOS
+Windows, MacOS
 
 **開発**\
 DEVEL株式会社、ビネット＆クラリティ合同会社
