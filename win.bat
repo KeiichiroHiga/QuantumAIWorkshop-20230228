@@ -4,4 +4,4 @@ pip install osmnx
 pip install scikit-learn
 pip install xgboost
 pip install dwave-ocean-sdk
-pip install -U matplotlib==3.1.3
+pip install matplotlib
