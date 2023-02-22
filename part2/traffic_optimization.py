@@ -4,7 +4,7 @@ from neal import SimulatedAnnealingSampler
 from dwave.system import DWaveSampler, EmbeddingComposite
 from pyqubo import Binary
 
-from part2.congestion import get_noise_data, get_train_data, train, predict, show_congestion
+from congestion import get_noise_data, get_train_data, train, predict, show_congestion
 from traffic_map import get_map_data, get_nearest_nodes, get_shortest_path, show_map_data
 
 ########################
@@ -35,6 +35,7 @@ PATH_NUMBER = 5
 weight = 1000
 SHOTS = 1000
 DWAVE_TOKEN=""
+DWAVE_DEVICE_NAME="DW_2000Q_6"
 
 ########################
 ######   古典AI    ######
@@ -94,14 +95,18 @@ if result > CONGESTION:
     print(f"Degree: {len(bqm)}")
 
     if not DWAVE_TOKEN:
-        sampleset = SimulatedAnnealingSampler().sample_qubo(qubo_compiled, num_reads=SHOTS)
+        sampler = SimulatedAnnealingSampler()
+        device = "SimulatedAnnealingSampler"
     else:
-        sampler = EmbeddingComposite(DWaveSampler(token=DWAVE_TOKEN))
-        sampleset = sampler.sample_qubo(qubo_compiled, num_reads=SHOTS)
+        REGION = "eu-central-1" if DWAVE_DEVICE_NAME == "Advantage_system5.3" else "na-west-1"
+        sampler = EmbeddingComposite(DWaveSampler(region=REGION, token=DWAVE_TOKEN, solver={"name": DWAVE_DEVICE_NAME}))
+        device = sampler.properties['child_properties']['chip_id'] + " (DWaveSampler)"
 
+    sampleset = sampler.sample_qubo(qubo_compiled, num_reads=SHOTS, label="Quamtum Annealing Part2")
     answer = sampleset.first.sample
     energy = sampleset.first.energy
-    print(answer)
+    print("デバイス:", device)
+    print(f"結果\n{answer}")
     print(f"Energy: {energy}")
 
     # 経路マッピング
