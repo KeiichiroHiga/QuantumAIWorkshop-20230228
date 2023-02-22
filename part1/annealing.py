@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 weight = 1000
 SHOTS = 1000
 DWAVE_TOKEN=""
+DWAVE_DEVICE_NAME="DW_2000Q_6"
 
 ########################
 ###   グラフデータ    ####
@@ -38,12 +39,17 @@ qubo_model = QUBO.compile()
 qubo_compiled, offset = qubo_model.to_qubo()
 
 if not DWAVE_TOKEN:
-        sampleset = SimulatedAnnealingSampler().sample_qubo(qubo_compiled, num_reads=SHOTS)
+    sampler = SimulatedAnnealingSampler()
+    device = "SimulatedAnnealingSampler"
 else:
-    sampler = EmbeddingComposite(DWaveSampler(token=DWAVE_TOKEN))
-    sampleset = sampler.sample_qubo(qubo_compiled, num_reads=SHOTS)
+    REGION = "eu-central-1" if DWAVE_DEVICE_NAME == "Advantage_system5.3" else "na-west-1"
+    sampler = EmbeddingComposite(DWaveSampler(region=REGION, token=DWAVE_TOKEN, solver={"name": DWAVE_DEVICE_NAME}))
+    device = sampler.properties['child_properties']['chip_id'] + " (DWaveSampler)"
 
+sampleset = sampler.sample_qubo(qubo_compiled, num_reads=SHOTS)
 answer = sampleset.first.sample
 energy = sampleset.first.energy
-print(answer)
+
+print("デバイス:", device)
+print(f"結果\n{answer}")
 print(f"Energy: {energy}")
